@@ -8,6 +8,12 @@ from PIL import Image
 import multiprocessing
 
 listMovies = any
+import json
+
+listMovies = any
+f = open ('D:\\Marvin Documentos\\Descargas\\Pruebas\\Pruebas\\detections.txt','w')
+
+detections={} #JSON detection with the amount.
 
 def cleanPath(route, movieDirectory):
     return str(movieDirectory).replace(route,'').replace('\\','').replace('.mp4','').replace(' ','').lower()
@@ -78,7 +84,19 @@ def extractFrames(path, nameMovie):
 def yolo(route):
     model = torch.hub.load('ultralytics/yolov5', 'custom', path=r'.\best.pt') #('ultralytics/yolov5', 'yolov5s')
     img = Image.open(route)
-    model(img, size=640)
+    #model(img, size=640)
+    results = model(img, size=640)
+    results.save()
+
+    className = results.pandas().xyxy[0].to_json()
+    nameJSON = json.loads(className)["name"]
+
+    for value in nameJSON.keys():
+        if nameJSON[value] not in detections:
+            detections[nameJSON[value]] = 1
+        else:
+            detections[nameJSON[value]] = detections[nameJSON[value]]+1
+
 
 def getResultYOLO(nameFolder, folder):
     path = '.\\Images\\' + nameFolder + '\\' + folder
@@ -88,8 +106,8 @@ def getResultYOLO(nameFolder, folder):
 
 def main():
     global listMovies
-    routeDirectory = 'D:\ArchivosPersonales\Celular\Video'
-
+    routeDirectory = './videos' 
+    
     getMoviesRoute(routeDirectory)
 
     createDirectories(routeDirectory)
@@ -106,10 +124,20 @@ def main():
     p1.join()
     p2.join()
 
-    getResultYOLO(listMovies[0:1], routeDirectory, 'first')
 
     fin = time.time()
     print("Tardo:" + str((fin - inicio)))
+    
+
+    fin = time.time()
+    print("Tardo:" + str((fin - inicio)))
+    
+    # Save results
+    print("\nDETECTIONS")
+    print(detections)
+    f.writelines("Hubo un total de " + str(len(listMovies)) + " imagenes. \nEn estas se detectaron los siguientes objetos peligrosos:\n")
+    for value in detections.keys():
+        f.writelines(str(value + ": " + str(detections[value]))+"\n")
 
 if __name__ == "__main__":
     print(multiprocessing.cpu_count())
