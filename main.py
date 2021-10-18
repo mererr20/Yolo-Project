@@ -36,7 +36,7 @@ def createMovieDirectories(nameMovie):
         if not os.path.exists('Images\\' + nameMovie + '\\first'): 
             os.makedirs('Images\\' + nameMovie + '\\first')
         if not os.path.exists('Images\\' + nameMovie + '\\second'): 
-            os.makedirs('Images\\' + nameMovie + '\\second')
+            os.makedirs('Images\\' + nameMovie + '\\second')    
     except OSError: 
         print ('Error: Creating directory of data')
 

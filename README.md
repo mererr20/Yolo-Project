@@ -42,7 +42,7 @@ Para llevar a cabo la detección de los objetos, es necesario contar con un mode
 <summary>Instalación</summary>
 
 Se requiere [**Python>=3.6.0**](https://www.python.org/) y los requerimientos especificados en
-[requirements.txt](https://github.com/mererr20/Yolo-Project.git/requirements.txt) instalados, incluyendo
+[requirements.txt](https://github.com/mererr20/Yolo-Project/requirements.txt) instalados, incluyendo
 [**PyTorch>=1.7**](https://pytorch.org/get-started/locally/):
 
 ```bash
@@ -51,45 +51,18 @@ $ cd Yolo-Project
 $ pip install -r requirements.txt
 ```
 
-Una vez tenemos todo lo necesario, debemos ejecutar el [main.py](https://github.com/mererr20/Yolo-Project.git/main.py)
+Una vez tenemos todo lo necesario, debemos ejecutar el [main.py](https://github.com/mererr20/Yolo-Project/main.py)
+
 </details>
 
 <br><br>
+# <div align="center">Explicación/Ejecución</div>
 
-## <div align="center">Environments</div>
+A continuación, explicamos cómo se implementó la solución realizada y su ejecución.
 
-Get started in seconds with our verified environments. Click each icon below for details.
+Para empezar, la función "main()" es la función principal y donde se crean el primer par de hilos. Aquí también es donde se indica la carpeta donde están los video o películas (específicamente en *routeDirectory*). Aquí se llama a las funciones que obtienen todos los videos que hay en la carpeta especificada y crear los directorios donde se guardarán las imágenes.
 
-<div align="center">
-    <a href="https://colab.research.google.com/github/ultralytics/yolov5/blob/master/tutorial.ipynb">
-        <img src="https://github.com/ultralytics/yolov5/releases/download/v1.0/logo-colab-small.png" width="15%"/>
-    </a>
-    <a href="https://www.kaggle.com/ultralytics/yolov5">
-        <img src="https://github.com/ultralytics/yolov5/releases/download/v1.0/logo-kaggle-small.png" width="15%"/>
-    </a>
-    <a href="https://hub.docker.com/r/ultralytics/yolov5">
-        <img src="https://github.com/ultralytics/yolov5/releases/download/v1.0/logo-docker-small.png" width="15%"/>
-    </a>
-    <a href="https://github.com/ultralytics/yolov5/wiki/AWS-Quickstart">
-        <img src="https://github.com/ultralytics/yolov5/releases/download/v1.0/logo-aws-small.png" width="15%"/>
-    </a>
-    <a href="https://github.com/ultralytics/yolov5/wiki/GCP-Quickstart">
-        <img src="https://github.com/ultralytics/yolov5/releases/download/v1.0/logo-gcp-small.png" width="15%"/>
-    </a>
-</div>  
+*getFrames* es la que se encarga de obtener las imágenes de los videos. Específicamente se extrae un frame (image) por segundo. En esta función es donde se hacen también los otros pares de hilos ya que se divide el video en 2 carpetas de imágenes.
 
-## <div align="center">Integrations</div>
-
-<div align="center">
-    <a href="https://wandb.ai/site?utm_campaign=repo_yolo_readme">
-        <img src="https://github.com/ultralytics/yolov5/releases/download/v1.0/logo-wb-long.png" width="49%"/>
-    </a>
-    <a href="https://roboflow.com/?ref=ultralytics">
-        <img src="https://github.com/ultralytics/yolov5/releases/download/v1.0/logo-roboflow-long.png" width="49%"/>
-    </a>
-</div>
-
-|Weights and Biases|Roboflow ⭐ NEW|
-|:-:|:-:|
-|Automatically track and visualize all your YOLOv5 training runs in the cloud with [Weights & Biases](https://wandb.ai/site?utm_campaign=repo_yolo_readme)|Label and automatically export your custom datasets directly to YOLOv5 for training with [Roboflow](https://roboflow.com/?ref=ultralytics) |
+Finalmente, se llama a Yolo que se encarga de detectar los objetos según lo entendido por el modelo anteriormente explicado. Aquí también se guarda la data que va obteniendo en json y por último en un .txt 
 
