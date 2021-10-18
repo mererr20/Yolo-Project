@@ -148,7 +148,7 @@ def generateGraph(route):
         slices = tuple(list)
         colores = ('red','blue','green','#DD98AA','#18492D')
         pyplot.rcParams['toolbar']  = 'None'
-        _,_,texto = pyplot.bar(slices, colors=colores, labels=classes, autopct='%1.1f%%')
+        _,_,texto = pyplot.pie(slices, colors=colores, labels=classes, autopct='%1.1f%%')
         for tex in texto:
             tex.set_color('white')
         time = float(getLine((root + 'Final.txt')))
