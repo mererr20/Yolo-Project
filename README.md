@@ -67,9 +67,9 @@ Para empezar, la función "main(routeDirectory)" es la función principal, la cu
 
 Primeramente se hace la llamada de la función *getMoviesRoute*, esta nos permite extraer los nombres de las películas que se encuentren en la carpeta indicada. Luego de esto, se crean los directorios, donde se almaceneraon los resultados y frames obtenidos.
 
-Teniendo ya las rutas y los directorios necesarios para control, se llama la función encarga de crear los 2 primeros procesos, encargos de obtener los frames de las películas con la función *getFrames*. De cada película se extrae un frame (image) por segundo.
+Teniendo ya las rutas y los directorios necesarios (FinalResults e Images) para control, se llama la función encarga de crear los 2 primeros procesos, encargos de obtener los frames de las películas con la función *getFrames*. De cada película se extrae un frame (image) por segundo.
 
 Creando los directorios y obteniendo los frames, ya se puede proceder a hacer el análisis de los frames, para esto se llama la función encargada de crear 4 procesos, los cuales estarán encargados de ingresar a las carpetas donde se encuentran los frames.
 
-Finalmente, se llama la función *yolo*, YOLO se encarga de detectar los objetos según lo entendido por el modelo anteriormente explicado. Aquí también se guarda la data que va obteniendo en txt y por último se generan unas gráficas donde se muestran los resultados, además de una impresión en consola que muestra lo mismo.
+Finalmente, se llama la función *yolo*, YOLO se encarga de detectar los objetos según lo entendido por el modelo anteriormente explicado. Aquí también se guarda la data que va obteniendo en txt y por último se generan unas gráficas en la carpeta *FinalResults* donde se muestran los resultados, además de una impresión en consola que muestra lo mismo.
 
