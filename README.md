@@ -160,6 +160,6 @@ Para los resultados, se tomó una película llamada "Hombre lobo" con una duraci
 A nivel de consola se muestra así:
 
 <p>
-   <img width="550" src="https://github.com/mererr20/Yolo-Project/blob/main/ResultadosReadme/hombrelobo.png"></a>
+   <img width="550" src="https://github.com/mererr20/Yolo-Project/blob/main/ResultadosReadme/hombre.png"></a>
 </p>
 
