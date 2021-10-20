@@ -132,6 +132,15 @@ def getLine(root):
         for line in file:
             return line
 
+def convert(seconds): 
+    seconds = seconds % (24 * 3600) 
+    hour = seconds // 3600
+    seconds %= 3600
+    minutes = seconds // 60
+    seconds %= 60
+      
+    return "%d:%02d:%02d" % (hour, minutes, seconds)
+
 def generateGraph(route):
     global listMovies
     classes = ('Person', 'Drink', 'Weapon', 'Knife')
@@ -153,10 +162,17 @@ def generateGraph(route):
             tex.set_color('white')
         time = float(getLine((root + 'Final.txt')))
 
-        pyplot.annotate(('Time: ' + str(time) + ' seg.'), xy=(10, 20), xycoords='figure pixels')
+        pyplot.annotate(
+            (
+            'Results:' +
+            '\n\tPerson: ' + str(list[0]) +
+            '\n\tDrink: ' + str(list[1]) +
+            '\n\tWeapon: ' + str(list[2]) +
+            '\n\tKnife: ' + str(list[3]) +
+            '\nTime: ' + convert(time) + '.'
+            ), xy=(10, 20), xycoords='figure pixels')
         pyplot.axis('equal')
         pyplot.title('Film: ' + nameFolder)
-        #pyplot.show()
         pyplot.savefig('.\\FinalResults\\' + nameFolder + '.jpg')
         pyplot.close()
 
@@ -165,7 +181,7 @@ def generateGraph(route):
                 '\n\tDrink: ' + str(list[1]) +
                 '\n\tWeapon: ' + str(list[2]) +
                 '\n\tKnife: ' + str(list[3]) +
-                '\nThis detection was carried out in ' + str(time) + ' seg.')
+                '\nThis detection was carried out in ' + convert(time) + '.')
 
 def firstProcesses(routeDirectory,mitad,size):
     #Processes to get the frames of the videos
@@ -221,7 +237,7 @@ if __name__ == "__main__":
     cpuCount = multiprocessing.cpu_count()
     if (cpuCount >= 4):
         print('Welcome to the movie analyzer!')
-        main('D:\Peliculas') #Address of the folder to analyze
+        main('.\\videos') #Address of the folder to analyze
     else:
         print("I'm really sorry, but your system doesn't meet the requirements...\n" +
         "You need at least 4 processors, and you have " + cpuCount)
