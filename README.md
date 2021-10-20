@@ -29,10 +29,10 @@ En este proyecto, nos interesa la detección de objetos considerados como peligr
 <p>
 Para llevar a cabo la detección de los objetos, es necesario contar con un modelo entrenado para encontrar los objetos. En este caso, utilizamos y brindamos para su uso, un modelo entrenado con 5000 imágenes de cada una de las siguientes categorías:
 
-    - Personas.
-    - Bebidas alcohólicas.
-    - Armas.
-    - Cuchillos.
+    - Personas (Person).
+    - Bebidas alcohólicas (Drink).
+    - Armas (Weapon).
+    - Cuchillos (knife).
 </p>
 <br><br>
 </div>
