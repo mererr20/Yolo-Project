@@ -65,7 +65,7 @@ def extractFrames(path, nameMovie):
                 name = './Images/'+ nameMovie + '/firstPortion/frame' + str(count) + '.jpg'
                 cv2.imwrite(name, frame)
                 count += 1
-            if(currentframe % frameRate == 0 and currentframe > int(sizeFrame/2)):
+            if(currentframe % frameRate == 0 and currentframe >= int(sizeFrame/2)):
                 name = './Images/'+ nameMovie + '/secondPortion/frame' + str(count) + '.jpg'
                 cv2.imwrite(name, frame)
                 count += 1
@@ -158,6 +158,7 @@ def generateGraph(route):
         pyplot.title('Film: ' + nameFolder)
         #pyplot.show()
         pyplot.savefig('.\\FinalResults\\' + nameFolder + '.jpg')
+        pyplot.close()
 
         print('In film ' + nameFolder + ', the following classes have been detected: ' +
                 '\n\tPerson: ' + str(list[0]) +
@@ -209,17 +210,18 @@ def main(routeDirectory):
     createDirectories(routeDirectory)
     size = len(listMovies)
     mitad = int(size/2)
+
     firstProcesses(routeDirectory,mitad,size)
     secondProcesses(routeDirectory,mitad,size)
+
     countResults(routeDirectory)
     generateGraph(routeDirectory)
 
 if __name__ == "__main__":
     cpuCount = multiprocessing.cpu_count()
     if (cpuCount >= 4):
-        print('Welcome to the video processor!')
-        main('D:\ArchivosPersonales\Celular\Video')
+        print('Welcome to the movie analyzer!')
+        main('D:\Peliculas') #Address of the folder to analyze
     else:
         print("I'm really sorry, but your system doesn't meet the requirements...\n" +
         "You need at least 4 processors, and you have " + cpuCount)
-    
