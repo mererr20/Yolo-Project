@@ -52,7 +52,8 @@ $ cd Yolo-Project
 $ pip install -r requirements.txt
 ```
 
-Una vez tenemos todo lo necesario, debemos ejecutar el [main.py](https://github.com/mererr20/Yolo-Project/main.py) <br>
+Una vez tenemos todo lo necesario, debemos ejecutar el [main.py](https://github.com/mererr20/Yolo-Project/main.py)
+   
 En el [main.py](https://github.com/mererr20/Yolo-Project/main.py) se debe enviar por parámetros en el método main cuál será la carpeta a analizar (tomando en cuenta que se debe enviar la ruta de dicha carpeta, por ejemplo 'C:\User\...'), por defectos se indica la carpeta [videos](https://github.com/mererr20/Yolo-Project/videos) que se encuentra en la raíz de dicho proyecto.
 
 </details>
@@ -62,9 +63,13 @@ En el [main.py](https://github.com/mererr20/Yolo-Project/main.py) se debe enviar
 
 A continuación, explicamos cómo se implementó la solución realizada y su ejecución.
 
-Para empezar, la función "main()" es la función principal y donde se crean el primer par de hilos. Aquí también es donde se indica la carpeta donde están los video o películas (específicamente en *routeDirectory*). Aquí se llama a las funciones que obtienen todos los videos que hay en la carpeta especificada y crear los directorios donde se guardarán las imágenes.
+Para empezar, la función "main(routeDirectory)" es la función principal, la cual será la encargada de llamar las demás funciones para una ejecución correcta, y además, la encargada de recibir por parámetro la ruta de la carpeta a analizar, como se mencionó anteriormente.
 
-*getFrames* es la que se encarga de obtener las imágenes de los videos. Específicamente se extrae un frame (image) por segundo. En esta función es donde se hacen también los otros pares de hilos ya que se divide el video en 2 carpetas de imágenes.
+Primeramente se hace la llamada de la función *getMoviesRoute*, esta nos permite extraer los nombres de las películas que se encuentren en la carpeta indicada. Luego de esto, se crean los directorios, donde se almaceneraon los resultados y frames obtenidos.
 
-Finalmente, se llama a Yolo que se encarga de detectar los objetos según lo entendido por el modelo anteriormente explicado. Aquí también se guarda la data que va obteniendo en json y por último en un .txt 
+Teniendo ya las rutas y los directorios necesarios para control, se llama la función encarga de crear los 2 primeros procesos, encargos de obtener los frames de las películas con la función *getFrames*. De cada película se extrae un frame (image) por segundo.
+
+Creando los directorios y obteniendo los frames, ya se puede proceder a hacer el análisis de los frames, para esto se llama la función encargada de crear 4 procesos, los cuales estarán encargados de ingresar a las carpetas donde se encuentran los frames.
+
+Finalmente, se llama la función *yolo*, YOLO se encarga de detectar los objetos según lo entendido por el modelo anteriormente explicado. Aquí también se guarda la data que va obteniendo en txt y por último se generan unas gráficas donde se muestran los resultados, además de una impresión en consola que muestra lo mismo.
 
