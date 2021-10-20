@@ -149,3 +149,17 @@ Creando los directorios y obteniendo los frames, ya se puede proceder a hacer el
 
 Finalmente, se llama la función *yolo*, YOLO se encarga de detectar los objetos según lo entendido por el modelo anteriormente explicado. Aquí también se guarda la data que va obteniendo en txt y por último se generan unas gráficas en la carpeta *FinalResults* donde se muestran los resultados, además de una impresión en consola que muestra lo mismo.
 
+<br><br>
+# <div align="center">Resultados</div>
+Para los resultados, se tomó una película llamada "Hombre lobo" con una duración de 1h, de la cuál se obtuvo lo siguiente:
+
+<p>
+   <img width="550" src="https://github.com/mererr20/Yolo-Project/blob/main/ResultadosReadme/hombrelobo.jpg"></a>
+</p>
+
+A nivel de consola se muestra así:
+
+<p>
+   <img width="550" src="https://github.com/mererr20/Yolo-Project/blob/main/ResultadosReadme/hombrelobo.png"></a>
+</p>
+
