@@ -51,7 +51,8 @@ $ cd Yolo-Project
 $ pip install -r requirements.txt
 ```
 
-Una vez tenemos todo lo necesario, debemos ejecutar el [main.py](https://github.com/mererr20/Yolo-Project/main.py)
+Una vez tenemos todo lo necesario, debemos ejecutar el [main.py](https://github.com/mererr20/Yolo-Project/main.py) <br>
+En el [main.py](https://github.com/mererr20/Yolo-Project/main.py) se debe enviar por parámetros en el método main cuál será la carpeta a analizar (tomando en cuenta que se debe enviar la ruta de dicha carpeta, por ejemplo 'C:\User\...'), por defectos se indica la carpeta [videos](https://github.com/mererr20/Yolo-Project/videos) que se encuentra en la raíz de dicho proyecto.
 
 </details>
 
