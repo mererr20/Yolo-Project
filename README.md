@@ -7,11 +7,12 @@
 
 ## <div>Desarrollado por:</div>
 
-Merelyn Rodríguez Rojas
+<ul>
+   <li type="circle"> <a href=https://github.com/mererr20> Merelyn Rodríguez Rojas </a> </li>
+   <li type="circle"> <a href=https://github.com/mendez-jfer> Fernando Méndez Hurtado </a> </li>
+   <li type="circle"> <a href=https://github.com/LDVargas> Daniel Vargas Gómez </a> </li>
+</ul>
 
-Fernando Méndez Hurtado
-
-Daniel Vargas Gómez
 </p>
 
 # <div align="center">Introducción</div>
