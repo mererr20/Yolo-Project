@@ -24,23 +24,23 @@ def createDirectories(route):
         
 def createMovieDirectories(nameMovie):
     try:
-        if not os.path.exists('Images'): 
-            os.makedirs('Images')
+        if not os.path.exists('Frames'): 
+            os.makedirs('Frames')
         if not os.path.exists('FinalResults'): 
             os.makedirs('FinalResults')
-        if not os.path.exists('Images\\' + nameMovie): 
-            os.makedirs('Images\\'+ nameMovie)
-        if not os.path.exists('Images\\' + nameMovie + '\\firstPortion'): 
-            os.makedirs('Images\\' + nameMovie + '\\firstPortion')
-        if not os.path.exists('Images\\' + nameMovie + '\\secondPortion'): 
-            os.makedirs('Images\\' + nameMovie + '\\secondPortion')
-        if not os.path.exists('Images\\' + nameMovie + '\\results'): 
-            os.makedirs('Images\\' + nameMovie + '\\results')
-        open('Images\\' + nameMovie + '\\results\\Person.txt',"w") 
-        open('Images\\' + nameMovie + '\\results\\Drink.txt',"w") 
-        open('Images\\' + nameMovie + '\\results\\Knife.txt',"w") 
-        open('Images\\' + nameMovie + '\\results\\Weapon.txt',"w")
-        open('Images\\' + nameMovie + '\\results\\Final.txt',"w")
+        if not os.path.exists('Frames\\' + nameMovie): 
+            os.makedirs('Frames\\'+ nameMovie)
+        if not os.path.exists('Frames\\' + nameMovie + '\\firstPortion'): 
+            os.makedirs('Frames\\' + nameMovie + '\\firstPortion')
+        if not os.path.exists('Frames\\' + nameMovie + '\\secondPortion'): 
+            os.makedirs('Frames\\' + nameMovie + '\\secondPortion')
+        if not os.path.exists('Frames\\' + nameMovie + '\\results'): 
+            os.makedirs('Frames\\' + nameMovie + '\\results')
+        open('Frames\\' + nameMovie + '\\results\\Person.txt',"w") 
+        open('Frames\\' + nameMovie + '\\results\\Drink.txt',"w") 
+        open('Frames\\' + nameMovie + '\\results\\Knife.txt',"w") 
+        open('Frames\\' + nameMovie + '\\results\\Weapon.txt',"w")
+        open('Frames\\' + nameMovie + '\\results\\Final.txt',"w")
     except OSError: 
         print ('Error: Creating directory of data')
 
@@ -62,11 +62,11 @@ def extractFrames(path, nameMovie):
         if ret:
             frameRate = int (FPS) * timeRate
             if(currentframe % frameRate == 0 and currentframe < int(sizeFrame/2)): 
-                name = './Images/'+ nameMovie + '/firstPortion/frame' + str(count) + '.jpg'
+                name = './Frames/'+ nameMovie + '/firstPortion/frame' + str(count) + '.jpg'
                 cv2.imwrite(name, frame)
                 count += 1
             if(currentframe % frameRate == 0 and currentframe >= int(sizeFrame/2)):
-                name = './Images/'+ nameMovie + '/secondPortion/frame' + str(count) + '.jpg'
+                name = './Frames/'+ nameMovie + '/secondPortion/frame' + str(count) + '.jpg'
                 cv2.imwrite(name, frame)
                 count += 1
             currentframe += 1
@@ -79,7 +79,7 @@ def extractFrames(path, nameMovie):
 def getResultYOLO(route, list, folder):
     for movieDirectory in list:
         nameFolder = cleanPath(route, movieDirectory)
-        root = '.\\Images\\' + nameFolder + '\\'
+        root = '.\\Frames\\' + nameFolder + '\\'
         path =  root + folder
         listImage = glob.glob(path + os.sep + '*.jpg')
         inicio = time.time()
@@ -120,7 +120,7 @@ def countResults(route):
     global listMovies
     for movieDirectory in listMovies:
         nameFolder = cleanPath(route, movieDirectory)
-        root = '.\\Images\\' + nameFolder + '\\'
+        root = '.\\Frames\\' + nameFolder + '\\'
         readTxt(root, 'Drink')
         readTxt(root, 'Final')
         readTxt(root, 'Knife')
@@ -147,7 +147,7 @@ def generateGraph(route):
 
     for movieDirectory in listMovies:
         nameFolder = cleanPath(route, movieDirectory)
-        root = '.\\Images\\' + nameFolder + '\\results\\'
+        root = '.\\Frames\\' + nameFolder + '\\results\\'
         list = []
         list.append(int(getLine((root + 'Person.txt'))))
         list.append(int(getLine((root + 'Drink.txt'))))
@@ -155,7 +155,7 @@ def generateGraph(route):
         list.append(int(getLine((root + 'Knife.txt'))))
 
         slices = tuple(list)
-        colores = ('red','blue','green','#DD98AA','#18492D')
+        colores = ('#008F39','#7EBDC2','#DD98AA','#BB4430')
         pyplot.rcParams['toolbar']  = 'None'
         _,_,texto = pyplot.pie(slices, colors=colores, labels=classes, autopct='%1.1f%%')
         for tex in texto:
@@ -164,12 +164,12 @@ def generateGraph(route):
 
         pyplot.annotate(
             (
-            'Results:' +
-            '\n\tPerson: ' + str(list[0]) +
-            '\n\tDrink: ' + str(list[1]) +
-            '\n\tWeapon: ' + str(list[2]) +
-            '\n\tKnife: ' + str(list[3]) +
-            '\nTime: ' + convert(time) + '.'
+            '* Results:' +
+            '\n  - Person: ' + str(list[0]) +
+            '\n  - Drink: ' + str(list[1]) +
+            '\n  - Weapon: ' + str(list[2]) +
+            '\n  - Knife: ' + str(list[3]) +
+            '\n* Time: ' + convert(time) + '.'
             ), xy=(10, 20), xycoords='figure pixels')
         pyplot.axis('equal')
         pyplot.title('Film: ' + nameFolder)
@@ -184,6 +184,7 @@ def generateGraph(route):
                 '\nThis detection was carried out in ' + convert(time) + '.')
 
 def firstProcesses(routeDirectory,mitad,size):
+    global listMovies
     #Processes to get the frames of the videos
     if (size > 1):
         p1 = multiprocessing.Process(target=getFrames, args= (routeDirectory,listMovies[0:mitad]))
@@ -198,6 +199,7 @@ def firstProcesses(routeDirectory,mitad,size):
         p1.join()
 
 def secondProcesses(routeDirectory,mitad,size):
+    global listMovies
     #Process to send the images to YOLO
     if (size > 1):
         p3 = multiprocessing.Process(target=getResultYOLO, args= (routeDirectory, listMovies[0:mitad], 'firstPortion'))
