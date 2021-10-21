@@ -63,27 +63,31 @@ En el [main.py](https://github.com/mererr20/Yolo-Project/main.py) se debe enviar
 
 A continuación, explicamos cómo se implementó la solución realizada y su ejecución.
 
-Para empezar, la función "main(routeDirectory)" es la función principal, la cual será la encargada de llamar las demás funciones para una ejecución correcta, y además, la encargada de recibir por parámetro la ruta de la carpeta a analizar, como se mencionó anteriormente.
+Para empezar, la función [*main(routeDirectory)*](https://github.com/mererr20/Yolo-Project/blob/bbf18c89e7ad457235ad5188d9dbab9d051b005b/main.py#L225) es la función principal, la cual será la encargada de llamar las demás funciones para una correcta ejecución, además, la encargada de recibir por parámetro la ruta de la carpeta a analizar,<a href="#cómo-iniciar"> como se mencionó anteriormente.</a>
 
-Primeramente se hace la llamada de la función *getMoviesRoute*, esta nos permite extraer los nombres de las películas que se encuentren en la carpeta indicada. Luego de esto, se crean los directorios, donde se almaceneraon los resultados y frames obtenidos.
+Primeramente, se hace la llamada de la función [*getMoviesRoute*](https://github.com/mererr20/Yolo-Project/blob/bbf18c89e7ad457235ad5188d9dbab9d051b005b/main.py#L16), esta nos permite extraer los nombres de las películas que se encuentren en la carpeta indicada. Luego de esto, se crean los [directorios](https://github.com/mererr20/Yolo-Project/blob/bbf18c89e7ad457235ad5188d9dbab9d051b005b/main.py#L25), donde se creará una carpeta con el nombre de la película, dentro de esta se almacenarán los resultados (*results*) y fotogramas obtenidos (*firstPortion* y *secondPortion*).
 
-Teniendo ya las rutas y los directorios necesarios (FinalResults e Images) para control, se llama la función encarga de crear los 2 primeros procesos, encargos de obtener los frames de las películas con la función *getFrames*. De cada película se extrae un frame (image) por segundo.
+Teniendo ya las rutas y los directorios necesarios para control, se llama la función [*firstProcesses*](https://github.com/mererr20/Yolo-Project/blob/bbf18c89e7ad457235ad5188d9dbab9d051b005b/main.py#L186) encargada de crear los 2 primeros procesos, al primer proceso se le envía la mitad de las películas y al segundo el resto, estos procesos obtendrán los fotogramas de las películas con la función [*getFrames*](https://github.com/mererr20/Yolo-Project/blob/bbf18c89e7ad457235ad5188d9dbab9d051b005b/main.py#L47). De cada película se extrae un fotograma (image) por segundo.
 
-Creando los directorios y obteniendo los frames, ya se puede proceder a hacer el análisis de los frames, para esto se llama la función encargada de crear 4 procesos, los cuales estarán encargados de ingresar a las carpetas donde se encuentran los frames.
+Creado los directorios y obteniendo los fotogramas, ya se puede proceder a hacer el análisis de los fotogramas, para esto se llama la función [*secondProcesses*](https://github.com/mererr20/Yolo-Project/blob/bbf18c89e7ad457235ad5188d9dbab9d051b005b/main.py#L201) encargada de crear 4 procesos, los cuales estarán encargados de ingresar a la carpeta *Frames* donde se encuentran las carpetas con el nombre de cada pelicula, dentro de estas estarán los fotogramas obtenidos anteriormente.
 
-Finalmente, se llama la función *yolo*, YOLO se encarga de detectar los objetos según lo entendido por el modelo anteriormente explicado. Aquí también se guarda la data que va obteniendo en txt y por último se generan unas gráficas en la carpeta *FinalResults* donde se muestran los resultados, además de una impresión en consola que muestra lo mismo.
+Finalmente, se llama la función [*yolo*](https://github.com/mererr20/Yolo-Project/blob/bbf18c89e7ad457235ad5188d9dbab9d051b005b/main.py#L96), YOLO se encarga de detectar los objetos según lo entendido por el modelo anteriormente explicado. Aquí también se guarda la data que va obteniendo en varios txt's según la clase encontrada, y por último se generan unas gráficas con [*generateGraph*](https://github.com/mererr20/Yolo-Project/blob/bbf18c89e7ad457235ad5188d9dbab9d051b005b/main.py#L144) que se almacenarán en la carpeta *FinalResults*, además de una impresión en consola que muestra lo mismo.
 
 <br><br>
 # <div align="center">Resultados</div>
-Para los resultados, se tomó una película llamada "Hombre lobo" con una duración de 1h, de la cuál se obtuvo lo siguiente:
+Para los resultados, se tomó una película llamada "Hombre lobo" con una duración de 1h, de la cual se obtuvo lo siguiente:
 
 <p>
-   <img width="550" src="https://github.com/mererr20/Yolo-Project/blob/main/ResultadosReadme/hombrelobo.jpg"></a>
+   <div align="center">
+   <img width="550" src="https://github.com/mererr20/Yolo-Project/blob/main/resources/hombrelobo.jpg"></a>
+   </div>
 </p>
 
 A nivel de consola se muestra así:
 
 <p>
-   <img width="550" src="https://github.com/mererr20/Yolo-Project/blob/main/ResultadosReadme/hombre.png"></a>
+   <div align="center">
+      <img width="550" src="https://github.com/mererr20/Yolo-Project/blob/main/resources/hombrelobo.png"></a>
+   </div>
 </p>
 
